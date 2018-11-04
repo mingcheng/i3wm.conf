@@ -1,0 +1,9 @@
+configuration {
+	font: "PingFang SC 12";
+	sort: true;
+	case-sensitive: false;
+	cycle: true;
+	auto-select: true;
+	dpi: 192;
+	max-history-size: 48;
+}

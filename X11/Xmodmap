@@ -1,0 +1,11 @@
+!
+! Swap Caps_Lock and Control_L
+! https://unix.stackexchange.com/questions/107566/how-to-swap-ctrl-and-capslock-using-xmodmap
+! link to $HOME/.Xmodmap
+!
+remove Lock = Caps_Lock
+!remove Control = Control_L
+!keysym Control_L = Caps_Lock
+keysym Caps_Lock = Control_L
+!add Lock = Caps_Lock
+add Control = Control_L
