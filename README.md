@@ -33,6 +33,10 @@ pip3 install pydbus pytz tzlocal
 
 ## 杂项说明
 
+### 电源管理和网络管理
+
+基本上都使用了 mate 模块里面的对应包(mate-power-manager、nm-applet)，使用 mate 是因为包的依赖比较少同时能够提供完整而且简单的功能。
+
 ### CapsLock
 
 将 Capslock 这个键位映射成了 Ctrl，详细可参见 Xmodmap 文件。
@@ -49,7 +53,7 @@ pip3 install pydbus pytz tzlocal
 
 ![Screenshot](screenshots/emoji.png)
 
-因为项目本身使用了 gitmoji 等插件，所以需要终端以及网页显示 emoji，其实 Arch 下有很多 Emoji 的方案，但是我个人还是使用了 macOS 的 Apple Color Emoji 。原因主要有两点，一来是苹果的 Emoji 比较全二来显示方面能够和 macOS 保持一致。
+因为项目本身使用了 gitmoji 等插件，所以需要终端以及网页显示 emoji。配置文件在 `config/fontconfig` 目录下。其实 Arch 下有很多 Emoji 的方案，但是我个人还是使用了 macOS 的 Apple Color Emoji 。原因主要有两点，一来是苹果的 Emoji 比较全二来显示方面能够和 macOS 保持一致。
 
 注意:单独使用 Apple Color Emoji 在其它非 Apple 设备以及系统，可能在版权方面会有问题，哪怕已经拥有了台 Mac。
 
