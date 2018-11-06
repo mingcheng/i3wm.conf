@@ -36,7 +36,7 @@ floating_maximum_size 1000 x 800
 bindsym $mod+Return exec i3-sensible-terminal
 
 # locck the screen
-bindsym $mod+Ctrl+l exec "i3lock -c 000000"
+bindsym $mod+Ctrl+l exec xautolock -locknow
 
 # Rename the workspace
 bindsym $mod+Ctrl+Shift+r exec i3-input -F 'Rename workspace to "%s"' -P 'rename current workspace'
@@ -50,8 +50,19 @@ bindsym $mod+w kill
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 bindsym $mod+r exec --no-startup-id rofi -show drun
+bindsym XF86Search exec --no-startup-id rofi -show drun
+
 bindsym $mod+Tab exec --no-startup-id rofi -show window
+bindsym XF86Explorer exec --no-startup-id rofi -show window
+
 bindsym $mod+Shift+v exec --no-startup-id CM_LAUNCHER=rofi clipmenu
+bindsym XF86LaunchA exec --no-startup-id CM_LAUNCHER=rofi clipmenu
+
+# Open configure file by editor directly
+#bindsym XF86Tools exec gvim ~/.config/i3
+bindsym XF86Tools exec --no-startup-id mate-system-monitor
+bindsym ctrl+XF86Tools exec --no-startup-id gvim ~/.config/i3/config
+# @TODO XF86Display XF86WLAN
 
 # change focus
 bindsym $mod+h focus left
@@ -188,7 +199,8 @@ mode $mode_launcher {
 # finds out, if available)
 bar {
     font xft:Iosevka 8
-    i3bar_command i3bar
+    # https://github.com/i3/i3/issues/3335
+    i3bar_command i3bar -t
     status_command py3status -c ~/.config/i3/py3status.conf
     tray_output primary
 }
@@ -230,6 +242,9 @@ exec --no-startup-id redshift -l 30.2741:120.1551
 #exec --no-startup-id fcitx -r
 exec --no-startup-id ibus-daemon -drx
 
+# Shadowsockr
+exec_always --no-startup-id killall sslocal ; sslocal -c ~/cai.sh/shadowsocks/kr1.json
+
 # system font
 font xft: PingFang SC 10
 
@@ -238,9 +253,10 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
 
 # 音量调节按钮
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
+bindsym XF86AudioLowerVolume exec amixer -q sset Master 5%-
+bindsym XF86AudioRaiseVolume exec amixer -q sset Master 5%+
+bindsym XF86AudioMute exec amixer -q sset Master toggle
+bindsym XF86AudioMicMute exec amixer -q sset Capture toggle
 
 # Take Screenshots
 bindsym --release Print exec --no-startup-id scrot "$HOME/Pictures/Scrot-%Y-%m-%d-%H:%M:%S.png"
@@ -253,10 +269,10 @@ for_window [class="GitKraken"] border none move container to workspace GitKraken
 for_window [class="Chromium"] border none move container to workspace Chromium
 bindsym $mod+Ctrl+u workspace Chromium
 
-for_window [class="jetbrains-idea-ce"] border none move container to workspace IntelliJ
+for_window [class="jetbrains-idea-ce"] move container to workspace IntelliJ
 bindsym $mod+Ctrl+j workspace IntelliJ
 
-for_window [class="code" title="Code - OSS$"] border none move container to workspace Code
+for_window [class="code" title="Code - OSS$"] move container to workspace Code
 bindsym $mod+Ctrl+o workspace Code
 
 for_window [class="Firefox"] border none move container to workspace Firefox
@@ -268,16 +284,20 @@ for_window [class="Hyper"] border none move container to workspace Hyper
 for_window [class="Terminator"] border none move container to workspace Terminator
 bindsym $mod+Ctrl+t workspace Terminator
 
-for_window [class="Gvim"] border none move container to workspace Gvim
+for_window [class="Gvim"] move container to workspace Gvim
 bindsym $mod+Ctrl+g workspace Gvim
 
 for_window [class="netease-cloud-music"] border none move container to workspace "Cloud Music"
 # bindsym $mod+Ctrl+n workspace "Cloud Music"
 
 for_window [class="Rhythmbox"] move container to workspace "Rhythmbox"
+for_window [class="Atril"] move container to workspace "Atril"
+for_window [class="Mate-system-monitor"] move container to workspace "System Monitor"
+
+# Screen saver
+exec --no-startup-id xautolock -time 5 -locker 'i3lock-fancy'
 
 # Wallpaper
 exec --no-startup-id xsetroot -gray
 
-# Screen saver
-# exec --no-startup-id xautolock -time 5 -locker 'i3lock -c 000000'
+# vim:filetype=i3
