@@ -5,5 +5,5 @@ configuration {
 	cycle: true;
 	auto-select: true;
 	dpi: 192;
-	max-history-size: 48;
+	max-history-size: 96;
 }
