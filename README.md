@@ -42,7 +42,7 @@ pip3 install pydbus pytz tzlocal
 
 需要使用 xautolock 以及 i3lock 的相互配合，后期使用了 i3lock-fancy 的软件包，相比黑屏的 i3lock 视觉效果上会好很多。
 
-休眠以后自动锁定，使用 i3lock 这个 service，参见配置文件中 `config/i3/i3lock@.service` 这个文件。
+原理方面，使用 xautolock 自动配置 lock 时间以及对应的命令调用 i3lock，然后当需要直接锁定的以后，调用 `xautolock -locknow` 即可。使用休眠以后自动锁定，使用 xautolock 这个 service，参见配置文件中 `systemd/xautolock@.service` 这个文件。
 
 ### 电源管理和网络管理
 
@@ -54,37 +54,18 @@ pip3 install pydbus pytz tzlocal
 
 ### 剪贴板管理
 
-剪贴板历史使用 ClipMenu + rofi 方案，详细可以在对应的 Arch Wiki 上找到。
+剪贴板历史使用 ClipMenu + rofi 方案，详细可以在对应的 Arch Wiki 上找到。 https://wiki.archlinux.org/index.php/clipboard
 
 ### 鼠标加速度
 
-因为个人习惯，默认去除了鼠标和触摸板的加速度，可以在 i3wm 的主配置中修改。建议在其它环境下(例如 GNOME)配置好比较输入的参数，然后获取以后粘贴到 i3wm 的配置中。
-
-我的对应的配置文件如下：
-
-```
-# @see https://wiki.archlinux.org/index.php/Mouse_acceleration
-exec --no-startup-id xinput --set-prop 'TPPS/2 IBM TrackPoint' 'libinput Accel Speed' -0.6
-exec --no-startup-id xinput --set-prop 'TPPS/2 IBM TrackPoint' 'libinput Accel Speed Default' 0
-#xinput --set-prop 'TPPS/2 IBM TrackPoint' 'libinput Accel Profiles Available' 1, 1
-exec --no-startup-id xinput --set-prop 'TPPS/2 IBM TrackPoint' 'libinput Accel Profile Enabled' 1, 0
-exec --no-startup-id xinput --set-prop 'TPPS/2 IBM TrackPoint' 'libinput Accel Profile Enabled Default' 1, 0
-
-exec --no-startup-id xinput --set-prop 'Synaptics TM3072-003' 'libinput Tapping Enabled' 1
-exec --no-startup-id xinput --set-prop 'Synaptics TM3072-003' 'libinput Accel Speed' -0.22
-exec --no-startup-id xinput --set-prop 'Synaptics TM3072-003' 'libinput Click Methods Available' 1, 1
-exec --no-startup-id xinput --set-prop 'Synaptics TM3072-003' 'libinput Click Method Enabled' 0, 1
-exec --no-startup-id xinput --set-prop 'Synaptics TM3072-003' 'Coordinate Transformation Matrix' 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0
-```
-
-因为我的 Thinkpad Carbon 3rd 分别有触控板以及指点杆(小红点)，因此要分别分开配置。
+因为个人习惯，默认去除了鼠标和触摸板的加速度，可以在 i3wm 的主配置中修改。建议在其它环境下(例如 GNOME)配置好比较输入的参数，然后获取以后粘贴到 i3wm 的配置中。我的 Thinkpad Carbon 3rd 分别有触控板以及指点杆(小红点)，因此要分别分开配置。
 
 ### Apple Color Emoji
 
 ![Screenshot](screenshots/emoji.png)
 
-因为项目本身使用了 gitmoji 等插件，所以需要终端以及网页显示 emoji。配置文件在 `config/fontconfig` 目录下。其实 Arch 下有很多 Emoji 的方案，但是我个人还是使用了 macOS 的 Apple Color Emoji 。原因主要有两点，一来是苹果的 Emoji 比较全二来显示方面能够和 macOS 保持一致。
+因为项目本身使用了 gitmoji 等插件，所以需要终端以及网页显示 emoji。配置文件在 `config/fontconfig` 目录下。其实 Arch 下有很多 Emoji 的方案，但是我个人还是使用了 macOS 的 Apple Color Emoji 。
 
-注意:单独使用 Apple Color Emoji 在其它非 Apple 设备以及系统，可能在版权方面会有问题，哪怕已经拥有了台 Mac。
+原因主要有两点，一来是苹果的 Emoji 比较全二来显示方面能够和 macOS 保持一致。注意:单独使用 Apple Color Emoji 在其它非 Apple 设备以及系统，可能在版权方面会有问题，哪怕已经拥有了台 Mac。
 
 `- eof -`
