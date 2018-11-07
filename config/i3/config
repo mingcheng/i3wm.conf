@@ -236,7 +236,7 @@ exec --no-startup-id redshift -l 30.2741:120.1551
 exec --no-startup-id ibus-daemon -drx
 
 # Shadowsockr
-exec_always --no-startup-id killall sslocal ; sslocal -c ~/cai.sh/shadowsocks/kr1.json
+exec_always --no-startup-id killall sslocal ; sslocal -c ~/cai.sh/shadowsocks/hk2.json
 
 # system font
 font xft: PingFang SC 10
@@ -289,8 +289,9 @@ for_window [class="netease-cloud-music"] border none move container to workspace
 for_window [class="Rhythmbox"] move container to workspace "Rhythmbox"
 for_window [class="Atril"] move container to workspace "Atril"
 for_window [class="Mate-system-monitor"] move container to workspace "System Monitor"
+
 # Screen saver
-exec --no-startup-id xautolock -time 5 -locker 'i3lock-fancy'
+#exec --no-startup-id xautolock -time 5 -locker 'i3lock-fancy -gpnf Iosevka -- scrot -z'
 
 # Wallpaper
 exec --no-startup-id xsetroot -gray

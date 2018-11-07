@@ -1,16 +1,14 @@
-#/etc/systemd/system/i3lock@.service
+#/etc/systemd/system/autolock@.service
 
 [Unit]
-Description=User resume actions
+Description=Lock Screen When Suspended
 Before=sleep.target
 
 [Service]
 User=%I
 Type=forking
 Environment=DISPLAY=:0
-ExecStart=/usr/bin/i3lock-fancy
-
-
+ExecStart=xautolock -locknow
 
 [Install]
 WantedBy=suspend.target
