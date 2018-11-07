@@ -291,7 +291,7 @@ for_window [class="Atril"] move container to workspace "Atril"
 for_window [class="Mate-system-monitor"] move container to workspace "System Monitor"
 
 # Screen saver
-#exec --no-startup-id xautolock -time 5 -locker 'i3lock-fancy -gpnf Iosevka -- scrot -z'
+exec --no-startup-id xautolock -time 5 -locker 'i3lock-fancy -gpnf Iosevka -- scrot -z'
 
 # Wallpaper
 exec --no-startup-id xsetroot -gray
