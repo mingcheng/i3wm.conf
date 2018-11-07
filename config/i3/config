@@ -294,6 +294,7 @@ for_window [class="Mate-system-monitor"] move container to workspace "System Mon
 exec --no-startup-id xautolock -time 5 -locker 'i3lock-fancy -gpnf Iosevka -- scrot -z'
 
 # Wallpaper
-exec --no-startup-id xsetroot -gray
+#exec --no-startup-id xsetroot -gray
+exec --no-startup-id feh --bg-scale ~/.icons/X1Carbon3a.png
 
 # vim:filetype=i3
