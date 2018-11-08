@@ -236,7 +236,8 @@ exec --no-startup-id redshift -l 30.2741:120.1551
 exec --no-startup-id ibus-daemon -drx
 
 # Shadowsockr
-exec_always --no-startup-id killall sslocal ; sslocal -c ~/cai.sh/shadowsocks/hk2.json
+#exec_always --no-startup-id killall sslocal ; sslocal -c `find ~/cai.sh/shadowsocks -type f | shuf -n 1`
+exec_always --no-startup-id sleep 3 && ~/cai.sh/shadowsocks/connect.sh
 
 # system font
 font xft: PingFang SC 10
@@ -291,10 +292,16 @@ for_window [class="Atril"] move container to workspace "Atril"
 for_window [class="Mate-system-monitor"] move container to workspace "System Monitor"
 
 # Screen saver
-exec --no-startup-id xautolock -time 5 -locker 'i3lock-fancy -gpnf Iosevka -- scrot -z'
+#exec --no-startup-id xautolock -time 5 -locker 'i3lock-fancy -gpf Iosevka'
+exec --no-startup-id xautolock -time 5 -locker 'i3lock -u -i ~/.icons/mac-kernel-panic2.png -c 222222'
+#exec --no-startup-id xautolock -time 5 -locker 'i3lock -u -c 1f67b1 -i ~/.icons/blue-bsod.png'
+#exec --no-startup-id xautolock -time 5 -locker 'i3lock -u -c 1c74a6 -i ~/.icons/perfectly.png'
 
 # Wallpaper
 #exec --no-startup-id xsetroot -gray
 exec --no-startup-id feh --bg-scale ~/.icons/X1Carbon3a.png
+
+# Conky Status
+exec --no-startup-id conky -qc ~/.config/conky/conky.conf
 
 # vim:filetype=i3
