@@ -256,6 +256,10 @@ bindsym XF86AudioMicMute exec amixer -q sset Capture toggle
 bindsym --release Print exec --no-startup-id scrot "$HOME/Pictures/Scrot-%Y-%m-%d-%H:%M:%S.png"
 bindsym --release Shift+Print exec --no-startup-id scrot -s "$HOME/Pictures/Scrot-%Y-%m-%d-%H:%M:%S.png"
 
+# Move between muti-screen 
+bindsym $mod+Ctrl+Right move workspace to output right
+bindsym $mod+Ctrl+Left move workspace to output left
+
 # Application window adjust
 for_window [window_role=".*Setting.*|.*Preference.*"] floating enable border normal
 for_window [class="GitKraken"] border none move container to workspace GitKraken
@@ -293,15 +297,19 @@ for_window [class="Mate-system-monitor"] move container to workspace "System Mon
 
 # Screen saver
 #exec --no-startup-id xautolock -time 5 -locker 'i3lock-fancy -gpf Iosevka'
-#exec --no-startup-id xautolock -time 5 -locker 'i3lock -u -i ~/.icons/mac-kernel-panic2.png -c 222222'
+exec --no-startup-id xautolock -time 5 -locker 'i3lock -i ~/.icons/mac-kernel-panic2.png -c 222222'
 #exec --no-startup-id xautolock -time 5 -locker 'i3lock -u -c 1f67b1 -i ~/.icons/blue-bsod.png'
-exec --no-startup-id xautolock -time 5 -locker 'i3lock -u -c 1c74a6 -i ~/.icons/perfectly.png'
-
-# Wallpaper
-#exec --no-startup-id xsetroot -gray
-exec --no-startup-id feh --bg-scale ~/.icons/X1Carbon3a.png
+#exec --no-startup-id xautolock -time 5 -locker 'i3lock -c 1c74a6 -i ~/.icons/perfectly.png'
 
 # Conky Status
 exec --no-startup-id conky -qc ~/.config/conky/conky.conf
+
+# Multihead Monitor
+# https://wiki.archlinux.org/index.php/Multihead
+exec_always --no-startup-id ~/Workbench/i3wm.conf/scripts/hotplug-monitor-dp1.sh
+
+# Wallpaper
+#exec --no-startup-id xsetroot -gray
+exec_always --no-startup-id sleep 2 && feh --bg-scale ~/.icons/X1Carbon3a.png
 
 # vim:filetype=i3

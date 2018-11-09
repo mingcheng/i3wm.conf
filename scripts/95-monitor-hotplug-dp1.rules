@@ -1,0 +1,5 @@
+# Rule for executing commands when an external screen is plugged in.
+# Credits go to: http://unix.stackexchange.com/questions/4489/a-tool-for-automatically-applying-randr-configuration-when-external-display-is-p
+# https://ruedigergad.com/2012/01/28/hotplug-an-external-screen-to-your-laptop-on-linux/
+ 
+ACTION=="change", SUBSYSTEM=="drm", RUN+="/home/lyum/Workbench/i3wm.conf/scripts/hotplug-monitor-dp1.sh"
