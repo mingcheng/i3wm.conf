@@ -48,8 +48,8 @@ bindsym XF86Search exec --no-startup-id rofi -show drun
 bindsym $mod+Tab exec --no-startup-id rofi -show window
 bindsym XF86Explorer exec --no-startup-id rofi -show window
 
-bindsym $mod+Shift+v exec --no-startup-id CM_LAUNCHER=rofi clipmenu
-bindsym XF86LaunchA exec --no-startup-id CM_LAUNCHER=rofi clipmenu
+bindsym $mod+Shift+v exec --no-startup-id CM_LAUNCHER=rofi CM_DIR=$HOME/.cache clipmenu
+bindsym XF86LaunchA exec --no-startup-id CM_LAUNCHER=rofi CM_DIR=$HOME/.cache clipmenu
 
 # Open configure file by editor directly
 #bindsym XF86Tools exec gvim ~/.config/i3
@@ -225,7 +225,7 @@ exec --no-startup-id mate-power-manager
 exec --no-startup-id dunst
 
 # Start Clipmenud
-exec --no-startup-id clipmenud
+exec --no-startup-id CM_DIR=$HOME/.cache clipmenud
 
 # For redshift(Hangzhou)
 # @see https://wiki.archlinux.org/index.php/redshift
@@ -293,9 +293,9 @@ for_window [class="Mate-system-monitor"] move container to workspace "System Mon
 
 # Screen saver
 #exec --no-startup-id xautolock -time 5 -locker 'i3lock-fancy -gpf Iosevka'
-exec --no-startup-id xautolock -time 5 -locker 'i3lock -u -i ~/.icons/mac-kernel-panic2.png -c 222222'
+#exec --no-startup-id xautolock -time 5 -locker 'i3lock -u -i ~/.icons/mac-kernel-panic2.png -c 222222'
 #exec --no-startup-id xautolock -time 5 -locker 'i3lock -u -c 1f67b1 -i ~/.icons/blue-bsod.png'
-#exec --no-startup-id xautolock -time 5 -locker 'i3lock -u -c 1c74a6 -i ~/.icons/perfectly.png'
+exec --no-startup-id xautolock -time 5 -locker 'i3lock -u -c 1c74a6 -i ~/.icons/perfectly.png'
 
 # Wallpaper
 #exec --no-startup-id xsetroot -gray
