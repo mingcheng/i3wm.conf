@@ -181,8 +181,10 @@ mode $mode_launcher {
    bindsym j exec idea, mode "default"
    bindsym o exec code, mode "default"
    bindsym g exec gvim, mode "default"
+   bindsym c exec caja, mode "default"
+   bindsym w exec electronic-wechat, mode "default"
 # https://ntzyz.io/post/fix-cloud-music-linux-client-hidpi-issue
-   bindsym n exec QT_SCALE_FACTOR=2 netease-cloud-music --force-device-scale-factor=2 --no-sandbox, mode "default"
+   bindsym n exec QT_SCALE_FACTOR=2 netease-cloud-music --force-device-scale-factor=1 --no-sandbox, mode "default"
 
    bindsym Escape mode "default"
    bindsym Return mode "default"
@@ -293,6 +295,7 @@ for_window [class="netease-cloud-music"] border none move container to workspace
 
 for_window [class="Rhythmbox"] move container to workspace "Rhythmbox"
 for_window [class="Atril"] move container to workspace "Atril"
+for_window [class="Caja"] move container to workspace "Caja"
 for_window [class="Mate-system-monitor"] move container to workspace "System Monitor"
 
 # Screen saver
@@ -307,6 +310,9 @@ exec --no-startup-id conky -qc ~/.config/conky/conky.conf
 # Multihead Monitor
 # https://wiki.archlinux.org/index.php/Multihead
 exec_always --no-startup-id ~/Workbench/i3wm.conf/scripts/hotplug-monitor-dp1.sh
+
+# Bluetootsh Keyboard
+exec --no-startup-id blueman-applet
 
 # Wallpaper
 #exec --no-startup-id xsetroot -gray
