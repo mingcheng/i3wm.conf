@@ -13,6 +13,7 @@
     - [Conky](#conky)
     - [剪贴板管理](#剪贴板管理)
     - [鼠标加速度](#鼠标加速度)
+    - [Apple 蓝牙键盘的支持](#apple-蓝牙键盘的支持)
     - [Apple Color Emoji](#apple-color-emoji)
 
 <!-- /TOC -->
@@ -81,6 +82,24 @@ pip3 install pydbus pytz tzlocal
 ### 鼠标加速度
 
 因为个人习惯，默认去除了鼠标和触摸板的加速度，可以在 i3wm 的主配置中修改。建议在其它环境下(例如 GNOME)配置好比较输入的参数，然后获取以后粘贴到 i3wm 的配置中。我的 Thinkpad Carbon 3rd 分别有触控板以及指点杆(小红点)，因此要分别分开配置。
+
+### Apple 蓝牙键盘的支持
+
+参考 Arch 对应的 Wiki 设置以及打开对应的服务(不要忘记 BIOS 里面设置)：
+
+- https://wiki.archlinux.org/index.php/Bluetooth
+- https://wiki.archlinux.org/index.php/Bluetooth_keyboard
+
+然后使用 `bluetoothctl` 配对对应的设备后，使用 Blueman 打开自动连接。
+
+由于 Apple 的无线键盘对应的 Win 键和 Thinkpad 对应的键位有所不同，因此采取的方案是将 Apple 对应的键位和笔记本的保持一致。
+
+```bash
+setxkbmap -layout us -option altwin:swap_alt_win -device 15
+```
+
+PS，`-device <id>` 可以通过 `xinput list` 得出。
+
 
 ### Apple Color Emoji
 
