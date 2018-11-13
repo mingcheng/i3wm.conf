@@ -1,0 +1,6 @@
+#https://unix.stackexchange.com/questions/144417/making-udev-rule-for-bluetooth-keyboard
+
+#ACTION=="bind", SUBSYSTEM=="hid*", DRIVER=="*apple*", RUN+="/bin/sh -c 'echo == >> /home/lyum/udev-env.txt; env >> /home/lyum/udev-env.txt'"
+
+ACTION=="bind", SUBSYSTEM=="hid*", DRIVER=="*apple*", RUN+="/usr/bin/sudo -i -u lyum /home/lyum/Workbench/i3wm.conf/scripts/meta-key-mapping.sh %p"
+
