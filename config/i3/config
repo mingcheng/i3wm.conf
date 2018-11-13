@@ -309,7 +309,7 @@ exec --no-startup-id conky -qc ~/.config/conky/conky.conf
 
 # Multihead Monitor
 # https://wiki.archlinux.org/index.php/Multihead
-exec_always --no-startup-id ~/Workbench/i3wm.conf/scripts/hotplug-monitor-dp1.sh
+#exec_always --no-startup-id ~/Workbench/i3wm.conf/scripts/hotplug-monitor-dp1.sh 1.5
 
 # Bluetootsh Keyboard
 exec --no-startup-id blueman-applet
