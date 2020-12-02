@@ -9,7 +9,7 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod4
+set $mod Mod1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -32,8 +32,8 @@ floating_minimum_size 500 x 600
 floating_maximum_size 1000 x 800
 
 # start a terminal
-#bindsym $mod+Return exec terminator
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec terminator
+#bindsym $mod+Return exec i3-sensible-terminal
 
 # locck the screen
 bindsym $mod+Ctrl+l exec xautolock -locknow
@@ -60,8 +60,8 @@ bindsym XF86LaunchA exec --no-startup-id CM_LAUNCHER=rofi clipmenu
 
 # Open configure file by editor directly
 #bindsym XF86Tools exec gvim ~/.config/i3
-bindsym XF86Tools exec --no-startup-id mate-system-monitor
-bindsym ctrl+XF86Tools exec --no-startup-id gvim ~/.config/i3/config
+#bindsym XF86Tools exec --no-startup-id mate-system-monitor
+#bindsym ctrl+XF86Tools exec --no-startup-id gvim ~/.config/i3/config
 # @TODO XF86Display XF86WLAN
 
 # change focus
@@ -187,7 +187,7 @@ mode $mode_launcher {
    bindsym u exec chromium, mode "default"
    bindsym j exec idea, mode "default"
    bindsym o exec code, mode "default"
-   bindsym g exec gvim, mode "default"
+   bindsym g exec goland, mode "default"
 # https://ntzyz.io/post/fix-cloud-music-linux-client-hidpi-issue
    bindsym n exec QT_SCALE_FACTOR=2 netease-cloud-music --force-device-scale-factor=2 --no-sandbox, mode "default"
 
@@ -198,10 +198,10 @@ mode $mode_launcher {
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-    font xft:Iosevka 8
+    font xft:Sarasa Mono SC 10
     # https://github.com/i3/i3/issues/3335
     i3bar_command i3bar -t
-    status_command py3status -c ~/.config/i3/py3status.conf
+    status_command py3status -c ~/.config/py3status/config
     tray_output primary
 }
 
@@ -225,42 +225,51 @@ exec --no-startup-id xinput --set-prop 'Synaptics TM3072-003' 'Coordinate Transf
 # Start network manager
 exec --no-startup-id nm-applet
 
+# Start bluetooth applet
+#exec --no-startup-id blueman-applet
+
 # Start power manager
-exec --no-startup-id mate-power-manager
+#exec --no-startup-id xfce4-power-manager
 
 # Start notification manager
 exec --no-startup-id dunst
 
 # Start Clipmenud
-exec --no-startup-id clipmenud
+#exec --no-startup-id xfce4-clipman
 
 # For redshift(Hangzhou)
 # @see https://wiki.archlinux.org/index.php/redshift
-exec --no-startup-id redshift -l 30.2741:120.1551
+exec --no-startup-id redshift -l 30.28:120.16
 
 # Chinese input
 #exec --no-startup-id fcitx -r
 exec --no-startup-id ibus-daemon -drx
 
 # Shadowsockr
-exec_always --no-startup-id killall sslocal ; sslocal -c ~/cai.sh/shadowsocks/kr1.json
+#exec_always --no-startup-id killall sslocal ; sslocal -c ~/cai.sh/shadowsocks/kr1.json
 
 # system font
-font xft: PingFang SC 10
+font xft:PingFang SC 10
 
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
 
+# Keyboard brightness
+# @see https://wiki.archlinux.org/index.php/keyboard_backlight
+bindsym --release Shift+XF86MonBrightnessUp exec brightnessctl --device='chromeos::kbd_backlight' set 50
+bindsym --release Shift+XF86MonBrightnessDown exec brightnessctl --device='chromeos::kbd_backlight' set 0
+
 # 音量调节按钮
-bindsym XF86AudioLowerVolume exec amixer -q sset Master 5%-
-bindsym XF86AudioRaiseVolume exec amixer -q sset Master 5%+
-bindsym XF86AudioMute exec amixer -q sset Master toggle
-bindsym XF86AudioMicMute exec amixer -q sset Capture toggle
+#bindsym XF86AudioLowerVolume exec amixer -q sset Master 5%-
+#bindsym XF86AudioRaiseVolume exec amixer -q sset Master 5%+
+#bindsym XF86AudioMute exec amixer -q sset Master toggle
+#bindsym XF86AudioMicMute exec amixer -q sset Capture toggle
 
 # Take Screenshots
-bindsym --release Print exec --no-startup-id scrot "$HOME/Pictures/Scrot-%Y-%m-%d-%H:%M:%S.png"
-bindsym --release Shift+Print exec --no-startup-id scrot -s "$HOME/Pictures/Scrot-%Y-%m-%d-%H:%M:%S.png"
+#bindsym --release Print exec --no-startup-id scrot "$HOME/Pictures/Scrot-%Y-%m-%d-%H:%M:%S.png"
+bindsym --release $mod+Ctrl+Shift+s exec --no-startup-id scrot -s "$HOME/Desktop/Screenshots-%Y-%m-%d-%H:%M:%S.png"
+bindsym --release $mod+Shift+s exec --no-startup-id scrot -s '/tmp/%F_%T_$wx$h.png' -e 'xclip -selection clipboard -target image/png -i $f && rm $f && notify-send -t 1000 "Screenshot was captured to clipboard."'
 
 # Application window adjust
 for_window [window_role=".*Setting.*|.*Preference.*"] floating enable border normal
@@ -270,32 +279,35 @@ for_window [class="Chromium"] border none move container to workspace Chromium
 bindsym $mod+Ctrl+u workspace Chromium
 
 for_window [class="jetbrains-idea-ce"] move container to workspace IntelliJ
+for_window [class="jetbrains-goland"] move container to workspace Goland
 bindsym $mod+Ctrl+j workspace IntelliJ
+bindsym $mod+Ctrl+g workspace Goland
 
 for_window [class="code" title="Code - OSS$"] move container to workspace Code
 bindsym $mod+Ctrl+o workspace Code
 
-for_window [class="Firefox"] border none move container to workspace Firefox
+#for_window [class="Firefox"] border none move container to workspace Firefox
 # bindsym $mod+Ctrl+i workspace Firefox
 
-for_window [class="Hyper"] border none move container to workspace Hyper
+#for_window [class="Hyper"] border none move container to workspace Hyper
 # bindsym $mod+Ctrl+y workspace Hyper
 
 for_window [class="Terminator"] border none move container to workspace Terminator
 bindsym $mod+Ctrl+t workspace Terminator
 
-for_window [class="Gvim"] move container to workspace Gvim
-bindsym $mod+Ctrl+g workspace Gvim
+#for_window [class="Gvim"] move container to workspace Gvim
+#bindsym $mod+Ctrl+g workspace Gvim
 
-for_window [class="netease-cloud-music"] border none move container to workspace "Cloud Music"
+#for_window [class="netease-cloud-music"] border none move container to workspace "Cloud Music"
 # bindsym $mod+Ctrl+n workspace "Cloud Music"
 
-for_window [class="Rhythmbox"] move container to workspace "Rhythmbox"
-for_window [class="Atril"] move container to workspace "Atril"
-for_window [class="Mate-system-monitor"] move container to workspace "System Monitor"
+#for_window [class="Rhythmbox"] move container to workspace "Rhythmbox"
+#for_window [class="Atril"] move container to workspace "Atril"
+#for_window [class="Mate-system-monitor"] move container to workspace "System Monitor"
 
 # Screen saver
-exec --no-startup-id xautolock -time 5 -locker 'i3lock-fancy'
+#exec --no-startup-id xautolock -time 5 -locker 'i3lock -c 000000'
+exec --no-startup-id xautolock -time 5 -locker "systemctl suspend" -detectsleep
 
 # Wallpaper
 exec --no-startup-id xsetroot -gray
