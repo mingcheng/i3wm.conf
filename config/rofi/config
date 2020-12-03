@@ -1,8 +1,8 @@
 configuration {
-	font: "PingFang SC 12";
+	font: "Noto San CJK SC 10";
 	sort: true;
 	case-sensitive: false;
-	cycle: true;
+	cycle: false;
 	auto-select: true;
 	dpi: 192;
 	max-history-size: 96;
