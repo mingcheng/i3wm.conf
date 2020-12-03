@@ -1,4 +1,4 @@
-Xft.dpi: 192
+Xft.dpi: 144
 Xft.autohint: 0
 Xft.lcdfilter: lcddefault
 Xft.hintstyle: hintfull
@@ -6,11 +6,10 @@ Xft.hinting: 1
 Xft.antialias: 1
 Xft.rgba: rgb
 
+rofi.dpi: 144
+rofi.font: PingFang SC 10
 Xcursor.size: 48
 Xcursor.themes: capitaine-cursors
-
-rofi.dpi: 192
-rofi.font: Noto Sans CJK SC 10
 
 xscreensaver.Dialog.headingFont:    -*-terminus-bold-r-*-*-32-*-*-*-*-*-*-1
 xscreensaver.Dialog.bodyFont:       -*-terminus-bold-r-*-*-32-*-*-*-*-*-*-1
@@ -22,5 +21,3 @@ xscreensaver.passwd.passwdFont:     -*-terminus-bold-r-*-*-32-*-*-*-*-*-*-1
 
 !datestamp format--see the strftime(3) manual page for details
 xscreensaver.dateFormat:  ""
-
-

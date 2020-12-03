@@ -1,29 +1,35 @@
 # 明城的 i3wm 环境配置
 
-![Screenshot](screenshots/thinkpad.png)
-
-<!-- TOC -->
+<!-- TOC depthFrom:2 -->
 
 - [简介](#简介)
+- [环境介绍](#环境介绍)
 - [安装软件](#安装软件)
 - [配置项](#配置项)
-    - [自动锁定](#自动锁定)
-    - [电源管理和网络管理](#电源管理和网络管理)
-    - [CapsLock](#capslock)
-    - [Conky](#conky)
-    - [剪贴板管理](#剪贴板管理)
-    - [鼠标加速度](#鼠标加速度)
-    - [Apple 蓝牙键盘的支持](#apple-蓝牙键盘的支持)
-    - [Apple Color Emoji](#apple-color-emoji)
+  - [自动锁定](#自动锁定)
+  - [电源管理和网络管理](#电源管理和网络管理)
+  - [CapsLock](#capslock)
+  - [Conky](#conky)
+  - [剪贴板管理](#剪贴板管理)
+  - [鼠标加速度](#鼠标加速度)
+  - [Apple 蓝牙键盘的支持](#apple-蓝牙键盘的支持)
+  - [Apple Color Emoji](#apple-color-emoji)
 
 <!-- /TOC -->
+
+![Screenshot](screenshots/main.png)
 
 ## 简介
 
 您好，这里是明城的 Linux 图形配置文件列表，这里包括了 `i3wm`、xorg 相关的配置。由于都是出于需求出发，这里可能没有美化相关的配置，所以看起来会「很丑」。
 
-图形界面下，搭配的窗口管理器使用的是 `i3wm` 以及 `mate` 相关的些工具保证基本的操作(例如锁屏、电源、网络管理等)，桌面信息使用 `conkey` 。
+图形界面下，搭配的窗口管理器使用的是 i3wm 以及 xfce4 相关的些工具保证基本的操作(例如电源管理、网络管理等)。不要过于折腾 Linux 的图形环境，应该将更多的精力花在更有意义的事情上面(哪怕是发呆)。
 
+## 环境介绍
+
+目前（202012）硬件方面使用的是 PixelBook Go，同时安装的 Linux 发行版为 ArchLinux。
+
+图形界面下，搭配的窗口管理器使用的是 `i3wm` 以及 `mate` 相关的些工具保证基本的操作(例如锁屏、电源、网络管理等)，桌面信息使用 `conkey` 。
 
 ## 安装软件
 
@@ -36,7 +42,11 @@ sudo pacman -S xclip xsel xautolock
 sudo pacman -S mate-power-manager mate-system-monitor dunst
 ```
 
-后记，i3wm 目前还是有很多的问题（例如 Tray 的图标无法更新等），使用过以后还是使用了 `i3-gaps` 软件包，同时安装 `i3lock-fancy` 等相关的增强包。
+<del>i3wm 目前还是有很多的问题，使用过以后还是使用了 i3-gaps 软件包，同时安装 i3lock-fancy 等相关的增强包。</del>
+
+<del>i3wm 目前还是有很多的问题（例如 Tray 的图标无法更新等），使用过以后还是使用了 `i3-gaps` 软件包，同时安装 `i3lock-fancy` 等相关的增强包。</del>
+
+（后记 202012，Archlinux 使用最新的 i3 软件包已经没有对应的问题）
 
 ```
 yay -S i3-gaps i3lock-fancy-git
@@ -50,6 +60,13 @@ py3status 获取系统信息需要额外的 Python 模块，因此都需要安�
 pip3 install pydbus pytz tzlocal
 ```
 
+这样子软件包就安装好了。
+
+在 Archlinux 下，可以使用对应的 python 系列软件包安装：
+
+```bash
+pacman -S python-tzlocal python-pytz
+```
 
 ## 配置项
 
@@ -67,9 +84,14 @@ pip3 install pydbus pytz tzlocal
 
 基本上都使用了 mate 模块里面的对应包(`mate-power-manager`、`nm-applet`)，使用 mate 是因为包的依赖比较少同时能够提供完整而且简单的功能。
 
+注意，调用 xfce4-power-manager 的时候，会使用 xfce4 自己原生的锁屏因此需要配置取消锁屏的选项框。后续在 Archliux 中已经不使用对应的图形化电源管理前端，而只是使用 logind 加上 tlp 即可。
+
+hibernate 状态下需要大于内存容量的 swap 分区，因此务必在安装的时候不要忘记。
+
+
 ### CapsLock
 
-将 Capslock 这个键位映射成了 Ctrl，详细可参见 Xmodmap 文件。
+将 Capslock 这个键位映射成了 Ctrl，详细可参见 Xmodmap 文件。注意：针对 PixelBook 会有部分键位映射更新，具体参考文件中的内容。
 
 ### Conky
 
